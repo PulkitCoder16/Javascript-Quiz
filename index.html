@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Fest Group 8 Quiz</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <center>
+    <h1 class="ml3">Science Fest Group 8 Quiz</h1>
+    <button class="button" onclick="showRules()">Start</button>
+
+   </center>
+
+<script>
+
+  function showRules(){
+        swal("Rules of the quiz","There will be 6 questions and upon completing the quiz , you will see your score.","info",{
+        button : "Start",
+      }).then((value) =>{
+        window.location.href = 'quiz.html';
+      });
+  }
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>

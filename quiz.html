@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="quizstyle.css">
+<title>Quiz</title>
+ 
+
+</head>
+<body onload="quiz();">
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h2 id="question"></h2>
+        <ul>
+            <li>
+                <input type="radio" name = "answer" id = "r1" class = "answer">
+                <label for="a" id = "1_text"></label>
+            </li>
+            <li>
+                <input type="radio" name = "answer" id = "r2" class = "answer">
+                <label for="a" id = "2_text"></label>
+            </li>
+            <li>
+                <input type="radio" name = "answer" id = "r3" class = "answer">
+                <label for="a" id = "3_text"></label>
+            </li>
+            <li>
+                <input type="radio" name = "answer" id = "r4" class = "answer">
+                <label for="a" id ="4_text"></label>
+            </li>
+        </ul>
+    </div>
+    <button id="submit" onClick="check();" class = "submit">Submit</button>
+</div>
+
+</body>
+<script>
+ var index = 0;
+var score = 0;
+var count = 0;
+var nq;
+let question_list = [{
+        Question: "Who invented the telescope ?",
+        o1: "Hypatia",
+        o2: "Hans Lippershey",
+        o3: "Gallileo",
+        o4: "Johannes Kepler",
+        c: "Hans Lippershey"
+    },
+    {
+        Question: "What is the visible part of the Sun called ?",
+        o1: "Lithosphere",
+        o2: "Helisphere",
+        o3: "Photosphere",
+        o4: "Radiosphere",
+        c: "Photosphere"
+    },
+    {
+        Question: "How many times larger is the radius of the Sun than that of the Earth?",
+        o1: "1009",
+        o2: "2001",
+        o3: "109",
+        o4: "2009",
+        c: "109"
+    },
+    {
+        Question: "Approximately how many miles are there in a light-year?",
+        o1: "5.9 trillion",
+        o2: "5.9 billion",
+        o3: "5.9 lakh",
+        o4: "59 lakh",
+        c: "5.9 trillion"
+    },
+    {
+        Question: "When did the Space Age begin?",
+        o1: "1998",
+        o2: "1966",
+        o3: "1991",
+        o4: "1957",
+        c: "1957"
+    },
+    {
+        Question: "Which spacecraft was Laika, the first living creature sent into space?",
+        o1: "Sputnik 1",
+        o2: "Sputnik 2",
+        o3: "Vosktok 1",
+        o4: "Apollo 12",
+        c: "Sputnik 2"
+    },
+    {
+        Question: "What is the area surrounding a black hole called?",
+        o1: "Event Horizon",
+        o2: "Singularity",
+        o3: "Schwarzchild Radius",
+        o4: "Perimeter",
+        c: "Event Horizon"
+    },
+    {
+        Question: "How many stars are there in the Cassiopeia Constellation",
+        o1: "3",
+        o2: "4",
+        o3: "5",
+        o4: "6",
+        c: "5"
+    },
+    {
+        Question: "What type of star is Betelgeuse?",
+        o1: "Main Sequence",
+        o2: "Red Supergiant",
+        o3: "Neutron Star",
+        o4: "None of these",
+        c: "Red Supergiant"
+    },
+    {
+        Question: "What is the name of the largest black hole",
+        o1: "Ton 618",
+        o2: "M87 Black Hole",
+        o3: "Cygnus A Black Hole",
+        o4: "None of these",
+        c: "Red Supergiant"
+    } 
+
+];
+let question_temp_list = question_list;
+
+function quiz() {
+    index = Math.floor(Math.random() * question_temp_list.length - 1);
+    document.getElementById('question').innerHTML = question_temp_list[index].Question;
+
+    document.getElementById('1_text').innerHTML = question_temp_list[index].o1;
+    document.getElementById('2_text').innerHTML = question_temp_list[index].o2;
+    document.getElementById('3_text').innerHTML = question_temp_list[index].o3;
+    document.getElementById('4_text').innerHTML = question_temp_list[index].o4;
+
+
+
+}
+var audio = new Audio('correct.wav');
+var audio2 = new Audio('wrong.wav');
+
+function check() {
+    if (document.getElementById("r1").checked == true) {
+        if (document.getElementById("1_text").textContent == question_temp_list[index].c) {
+            score = score + 1;
+          swal("Correct","","success");
+            audio.play();
+             
+            
+                count = count + 1;
+               
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+        
+            
+        } else if (document.getElementById("1_text").textContent !== question_temp_list[index].c){
+            swal("Wrong","","error");
+            audio2.play();
+             
+          
+                count = count + 1;
+                
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+        }
+    }
+    if (document.getElementById("r2").checked == true) {
+        if (document.getElementById("2_text").textContent == question_temp_list[index].c) {
+            score = score + 1;
+            swal("Correct","","success");
+            audio.play();
+             
+           
+                count = count + 1;
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+      
+        
+        } else if (document.getElementById("1_text").textContent !== question_temp_list[index].c){
+            swal("Wrong","","error");
+            audio2.play();
+             
+      
+                count = count + 1;
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+         
+            
+        }
+    }
+    if (document.getElementById("r3").checked == true) {
+        if (document.getElementById("3_text").textContent == question_temp_list[index].c) {
+            score = score + 1;
+            swal("Correct","","success");
+            audio.play();
+             
+            
+                count = count + 1;
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+         
+           
+        } else if (document.getElementById("1_text").textContent !== question_temp_list[index].c) {
+            swal("Wrong","","error");
+            audio2.play();
+             
+  
+                count = count + 1;
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+        }
+    }
+    if (document.getElementById("r4").checked == true) {
+        if (document.getElementById("4_text").textContent == question_temp_list[index].c) {
+            score = score + 1;
+            swal("Correct","","success");
+            audio.play();
+        
+                count = count + 1;
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+              
+        } else if (document.getElementById("1_text").textContent !== question_temp_list[index].c){
+            swal("Wrong","","error");
+            audio2.play();
+             
+        
+                count = count + 1;  
+                if(count <  6){
+                    question_temp_list.splice(index , 1);
+                    quiz();
+                }else if (count == 6){
+                    localStorage.setItem("score",score);
+                    window.location.href = 'scorepage.html';
+                }
+         
+        }
+    }
+
+}
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</html>
